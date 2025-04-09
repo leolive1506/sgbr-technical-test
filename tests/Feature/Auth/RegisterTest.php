@@ -15,7 +15,7 @@ it('should be able to register a user', function () {
         'name'     => 'John Doe',
         'email'    => 'john@doe.com',
         'password' => 'password',
-    ])->dump()->assertJsonStructure([
+    ])->assertJsonStructure([
         'message',
         'status',
         'content' => [

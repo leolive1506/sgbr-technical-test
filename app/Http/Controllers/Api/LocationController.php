@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Constants\MessagesResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Location\IndexLocationRequest;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
 use App\Http\Resources\Location\LocationResource;
@@ -14,15 +15,18 @@ use Illuminate\Support\Str;
 
 class LocationController extends Controller
 {
-    public function index()
+    public function index(IndexLocationRequest $request)
     {
-        $location = Location::query()->select([
-            'id',
-            'name',
-            'state',
-            'city',
-            'slug'
-        ])->paginate();
+        $location = Location::query()
+            ->select([
+                'id',
+                'name',
+                'state',
+                'city',
+                'slug'
+            ])
+            ->filters($request->validated())
+            ->paginate();
 
         return $this->success(
             content: new PaginateResource($location, LocationResource::class)
