@@ -3,10 +3,6 @@
 </p>
 <p align="center"><h1 align="center">SGBR-TECHNICAL-TEST</h1></p>
 <p align="center">
-	<em><code>❯ REPLACE-ME</code></em>
-</p>
-<p align="center">
-	<img src="https://img.shields.io/github/license/leolive1506/sgbr-technical-test?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/leolive1506/sgbr-technical-test?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/leolive1506/sgbr-technical-test?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/leolive1506/sgbr-technical-test?style=default&color=0080ff" alt="repo-language-count">
@@ -20,20 +16,13 @@
 
 ##  Table of Contents
 
-- [ Overview](#-overview)
-- [ Features](#-features)
-- [ Project Structure](#-project-structure)
-  - [ Project Index](#-project-index)
-- [ Getting Started](#-getting-started)
-  - [ Prerequisites](#-prerequisites)
-  - [ Installation](#-installation)
-  - [ Usage](#-usage)
-  - [ Testing](#-testing)
-- [ Project Roadmap](#-project-roadmap)
-- [ Contributing](#-contributing)
-- [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
-
+- [ Getting Started](#getting-started)
+  - [ Prerequisites](#prerequisites)
+  - [ Installation](#installation)
+  - [ Usage](#usage)
+  - [ Testing](#testing)
+- [Technical Test](#technical-test)
+- [ Project Structure](#project-structure)
 ---
 
 ##  Getting Started
@@ -90,7 +79,7 @@ Run the test suite using the following command:
 
 ---
 
-## 📌 Technical Test
+## Technical Test
 
 Crie uma API RESTful para gerenciar **lugares (places)** com as seguintes funcionalidades:
 
