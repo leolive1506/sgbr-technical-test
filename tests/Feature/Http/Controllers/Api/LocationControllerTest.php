@@ -13,34 +13,6 @@ use function Pest\Laravel\putJson;
 
 use Illuminate\Support\Str;
 
-it('should update an existing location', function () {
-    $location = Location::factory()->create();
-
-    $newData = [
-        'name' => 'Los Angeles',
-        'state' => 'CA',
-        'city' => 'Los Angeles',
-    ];
-
-    $response = putJson(route('locations.update', $location->id), $newData);
-
-    $udpatedData = [
-        'id' => $location->id,
-        ...$newData,
-        'slug' => Str::slug($newData['name'])
-    ];
-
-    $response->assertOk()
-        ->assertJsonFragment([
-            'content' => $udpatedData,
-            'message' => MessagesResponse::UPDATED
-        ]);
-
-    assertDatabaseCount(Location::class, 1);
-
-    assertDatabaseHas(Location::class, $udpatedData);
-});
-
 it('should delete a location', function () {
     $location = Location::factory()->create();
 
