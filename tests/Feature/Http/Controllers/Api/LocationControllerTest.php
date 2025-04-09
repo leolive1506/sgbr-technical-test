@@ -1,9 +1,12 @@
 <?php
 
+use App\Constants\MessagesResponse;
 use App\Models\Location;
 
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -49,3 +52,19 @@ it('should update an existing location', function () {
         'slug' => Str::slug($newData['name'])
     ]);
 });
+
+it('should delete a location', function () {
+    $location = Location::factory()->create();
+
+    $response = deleteJson("/api/locations/{$location->id}");
+
+    $response->assertOk()
+        ->assertJsonFragment([
+            'message' => MessagesResponse::DELETED
+        ]);
+
+    assertSoftDeleted(Location::class, [
+        'id' => $location->id
+    ]);
+});
+

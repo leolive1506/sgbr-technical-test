@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\MessagesResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
@@ -58,6 +59,17 @@ class LocationController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $deleted  = Location::query()->where('id', $id)->delete();
+
+        if (!$deleted) {
+            return $this->error(
+                MessagesResponse::FAILED_DELETE,
+                Response::HTTP_NOT_FOUND,
+            );
+        }
+
+        return $this->success(
+            message: MessagesResponse::DELETED
+        );
     }
 }

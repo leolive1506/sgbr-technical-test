@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('state');
             $table->string('city');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
