@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
 use App\Models\Location;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
@@ -15,7 +14,17 @@ class LocationController extends Controller
 {
     public function index()
     {
-        //
+        $location = Location::query()->select([
+            'id',
+            'name',
+            'state',
+            'city',
+            'slug'
+        ])->paginate();
+
+        return $this->success(
+            content: $location
+        );
     }
 
     public function store(StoreLocationRequest $request)

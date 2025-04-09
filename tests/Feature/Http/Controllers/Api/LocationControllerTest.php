@@ -84,3 +84,17 @@ it('should find location by id', function () {
         ]);
 });
 
+it('should list location paginated', function () {
+    Location::factory()->count(3)->create();
+
+    $response = getJson('/api/locations');
+
+    $response->assertOk()
+        ->assertJsonStructure([
+            'content' => [
+                'data' => [
+                    '*' => ['id', 'name', 'slug', 'state', 'city']
+                ]
+            ]
+        ]);
+});
