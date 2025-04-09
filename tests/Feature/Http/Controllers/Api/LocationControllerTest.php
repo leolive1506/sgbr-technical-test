@@ -7,6 +7,7 @@ use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -66,5 +67,20 @@ it('should delete a location', function () {
     assertSoftDeleted(Location::class, [
         'id' => $location->id
     ]);
+});
+
+it('should find location by id', function () {
+    $location = Location::factory()->create();
+
+    $response = getJson("/api/locations/{$location->id}");
+
+    $response->assertOk()
+        ->assertJsonFragment([
+            'id' => $location->id,
+            'name' => $location->name,
+            'slug' => $location->slug,
+            'state' => $location->state,
+            'city' => $location->city,
+        ]);
 });
 

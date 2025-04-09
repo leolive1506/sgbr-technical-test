@@ -35,7 +35,17 @@ class LocationController extends Controller
 
     public function show(string $id)
     {
+        $location = Location::query()->select([
+            'id',
+            'name',
+            'state',
+            'city',
+            'slug'
+        ])->findOrFail($id);
 
+        return $this->success(
+            content: $location
+        );
     }
 
 
