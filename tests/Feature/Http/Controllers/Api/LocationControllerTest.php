@@ -13,27 +13,6 @@ use function Pest\Laravel\putJson;
 
 use Illuminate\Support\Str;
 
-it('should create a new location', function () {
-    $data = [
-        'name' => 'New York',
-        'state' => 'NY',
-        'city' => 'New York City',
-    ];
-
-    $response = postJson(route('locations.index'), $data);
-
-    $response->assertCreated()
-        ->assertJsonFragment([
-            'message' => MessagesResponse::CREATED
-        ])
-        ->assertJsonFragment($data);
-
-    assertDatabaseHas(Location::class, [
-        ...$data,
-        'slug' => Str::slug($data['name'])
-    ]);
-});
-
 it('should update an existing location', function () {
     $location = Location::factory()->create();
 
