@@ -28,12 +28,13 @@ class AuthController extends Controller
         $token = $user->createToken(Str::lower(request('email')) . '|' . request()->ip())->plainTextToken;
 
         return $this->success(
-            MessagesResponse::OK,
-            Response::HTTP_OK,
             [
                 'token' => $token,
                 'user'  => new UserResource($user),
-            ]);
+            ],
+            MessagesResponse::OK,
+            Response::HTTP_OK,
+        );
     }
 
     public function register(RegisterRequest $request): JsonResponse
@@ -63,9 +64,9 @@ class AuthController extends Controller
         }
 
         return $this->success(
+            $data,
             MessagesResponse::CREATED,
             Response::HTTP_CREATED,
-            $data
         );
     }
 
@@ -73,17 +74,17 @@ class AuthController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
 
-        return $this->success(MessagesResponse::TOKEN_REVOKED);
+        return $this->success(message: MessagesResponse::TOKEN_REVOKED);
     }
 
     public function me(Request $request): JsonResponse
     {
         return $this->success(
-            MessagesResponse::OK,
-            Response::HTTP_OK,
             [
                 'user' => new UserResource($request->user()),
-            ]
+            ],
+            MessagesResponse::OK,
+            Response::HTTP_OK,
         );
     }
 }

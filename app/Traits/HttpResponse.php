@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\MessageBag;
+use App\Constants\MessagesResponse;
 
 trait HttpResponse
 {
@@ -17,7 +18,7 @@ trait HttpResponse
         ], $status);
     }
 
-    public function success(string $message, int $status = Response::HTTP_OK, mixed $content = [])
+    public function success(mixed $content = [], string $message = MessagesResponse::OK, int $status = Response::HTTP_OK, )
     {
         $response = [
             'message' => $message,
