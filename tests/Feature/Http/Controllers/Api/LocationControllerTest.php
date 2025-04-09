@@ -23,6 +23,9 @@ it('should create a new location', function () {
     $response = postJson('/api/locations', $data);
 
     $response->assertCreated()
+        ->assertJsonFragment([
+            'message' => MessagesResponse::CREATED
+        ])
         ->assertJsonFragment($data);
 
     assertDatabaseHas(Location::class, [
@@ -42,16 +45,21 @@ it('should update an existing location', function () {
 
     $response = putJson("/api/locations/{$location->id}", $newData);
 
-    $response->assertOk()
-        ->assertJsonFragment($newData);
-
-    assertDatabaseCount(Location::class, 1);
-
-    assertDatabaseHas(Location::class, [
+    $udpatedData = [
         'id' => $location->id,
         ...$newData,
         'slug' => Str::slug($newData['name'])
-    ]);
+    ];
+
+    $response->assertOk()
+        ->assertJsonFragment([
+            'content' => $udpatedData,
+            'message' => MessagesResponse::UPDATED
+        ]);
+
+    assertDatabaseCount(Location::class, 1);
+
+    assertDatabaseHas(Location::class, $udpatedData);
 });
 
 it('should delete a location', function () {

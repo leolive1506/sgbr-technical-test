@@ -6,6 +6,8 @@ use App\Constants\MessagesResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
+use App\Http\Resources\Location\LocationResource;
+use App\Http\Resources\PaginateResource;
 use App\Models\Location;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -23,7 +25,7 @@ class LocationController extends Controller
         ])->paginate();
 
         return $this->success(
-            content: $location
+            content: new PaginateResource($location, LocationResource::class)
         );
     }
 
@@ -37,7 +39,8 @@ class LocationController extends Controller
         ]);
 
         return $this->success(
-            content: $location,
+            content: LocationResource::make($location),
+            message: MessagesResponse::CREATED,
             status: Response::HTTP_CREATED
         );
     }
@@ -53,7 +56,7 @@ class LocationController extends Controller
         ])->findOrFail($id);
 
         return $this->success(
-            content: $location
+            content: LocationResource::make($location),
         );
     }
 
@@ -71,7 +74,8 @@ class LocationController extends Controller
         $location->update($newData);
 
         return $this->success(
-            content: $location->refresh()
+            content: LocationResource::make($location->refresh()),
+            message: MessagesResponse::UPDATED
         );
     }
 

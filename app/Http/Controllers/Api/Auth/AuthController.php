@@ -31,9 +31,7 @@ class AuthController extends Controller
             [
                 'token' => $token,
                 'user'  => new UserResource($user),
-            ],
-            MessagesResponse::OK,
-            Response::HTTP_OK,
+            ]
         );
     }
 
@@ -82,9 +80,7 @@ class AuthController extends Controller
         return $this->success(
             [
                 'user' => new UserResource($request->user()),
-            ],
-            MessagesResponse::OK,
-            Response::HTTP_OK,
+            ]
         );
     }
 }
