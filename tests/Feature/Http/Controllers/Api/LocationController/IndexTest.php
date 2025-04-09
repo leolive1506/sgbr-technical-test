@@ -1,8 +1,17 @@
 <?php
 
 use App\Models\Location;
+use App\Models\User;
 
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\getJson;
+
+beforeEach(function () {
+    /** @var User $user */
+    $user = User::factory()->create();
+
+    actingAs($user);
+});
 
 it('should list location paginated', function () {
     Location::factory()->count(3)->create();

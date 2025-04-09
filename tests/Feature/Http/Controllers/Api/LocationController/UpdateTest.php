@@ -2,12 +2,21 @@
 
 use App\Constants\MessagesResponse;
 use App\Models\Location;
+use App\Models\User;
 
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\putJson;
 
 use Illuminate\Support\Str;
+
+beforeEach(function () {
+  /** @var User $user */
+  $user = User::factory()->create();
+
+  actingAs($user);
+});
 
 it('should update an existing location', function () {
     $location = Location::factory()->create();
