@@ -126,6 +126,7 @@ Cada lugar deve conter os seguintes campos:
 ---
 
 ## API Routes
+See Insominia file in docs/Insomnia_2025-04-09.yaml
 
 ### 🔐 Auth
 
