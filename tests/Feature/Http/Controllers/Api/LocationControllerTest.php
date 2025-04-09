@@ -20,7 +20,7 @@ it('should create a new location', function () {
         'city' => 'New York City',
     ];
 
-    $response = postJson('/api/locations', $data);
+    $response = postJson(route('locations.index'), $data);
 
     $response->assertCreated()
         ->assertJsonFragment([
@@ -43,7 +43,7 @@ it('should update an existing location', function () {
         'city' => 'Los Angeles',
     ];
 
-    $response = putJson("/api/locations/{$location->id}", $newData);
+    $response = putJson(route('locations.update', $location->id), $newData);
 
     $udpatedData = [
         'id' => $location->id,
@@ -65,7 +65,7 @@ it('should update an existing location', function () {
 it('should delete a location', function () {
     $location = Location::factory()->create();
 
-    $response = deleteJson("/api/locations/{$location->id}");
+    $response = deleteJson(route('locations.destroy', $location->id));
 
     $response->assertOk()
         ->assertJsonFragment([
@@ -80,7 +80,7 @@ it('should delete a location', function () {
 it('should find location by id', function () {
     $location = Location::factory()->create();
 
-    $response = getJson("/api/locations/{$location->id}");
+    $response = getJson(route('locations.show', $location->id));
 
     $response->assertOk()
         ->assertJsonFragment([
@@ -95,7 +95,7 @@ it('should find location by id', function () {
 it('should list location paginated', function () {
     Location::factory()->count(3)->create();
 
-    $response = getJson('/api/locations');
+    $response = getJson(route('locations.index'));
 
     $response->assertOk()
         ->assertJsonStructure([
