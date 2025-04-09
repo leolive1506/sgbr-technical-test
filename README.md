@@ -21,6 +21,7 @@
   - [ Installation](#installation)
   - [ Usage](#usage)
   - [ Testing](#testing)
+- [Api routes](#api-routes)
 - [Technical Test](#technical-test)
 - [ Project Structure](#project-structure)
 ---
@@ -121,6 +122,120 @@ Cada lugar deve conter os seguintes campos:
 - ✅ README com instruções completas (como executar, endpoints, etc.)
 - ✅ Código e nomenclaturas em **inglês**
 - ✅ Escreva **testes** automatizados
+
+---
+
+## API Routes
+
+### 🔐 Auth
+
+---
+
+### `POST /api/register`
+**Body**
+```json
+{
+  "name": "Leonardo Lopes",
+  "email": "leonardolivelopes2@gmail.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+```
+
+---
+
+### `POST /api/login`
+**Body**
+```json
+{
+  "email": "leonardolivelopes2@gmail.com",
+  "password": "password"
+}
+```
+
+---
+
+### `POST /api/logout`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+
+---
+
+### `GET /api/me`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+
+---
+
+### 📍 Locations
+
+---
+
+### `POST /api/locations`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+**Body**
+```json
+{
+  "name": "São Paulo",
+  "state": "SP",
+  "city": "São Paulo"
+}
+```
+
+---
+
+### `GET /api/locations`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+**Query Params**
+```text
+name (optional)
+```
+**Exemplo**
+```text
+/api/locations?name=paulo
+```
+
+---
+
+### `GET /api/locations/{id}`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+
+---
+
+### `PUT /api/locations/{id}`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
+**Body**
+```json
+{
+  "name": "São Paulo 2",
+  "state": "SP",
+  "city": "São Paulo"
+}
+```
+
+---
+
+### `DELETE /api/locations/{id}`
+**Headers**
+```text
+Authorization: Bearer {token}
+```
 
 ---
 
