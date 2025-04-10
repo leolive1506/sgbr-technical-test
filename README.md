@@ -63,6 +63,11 @@ Install sgbr-technical-test using one of the following methods:
 
 
 ###  Usage
+
+```sh
+❯ cp .env.example .env
+```
+
 Run sgbr-technical-test using the following command:
 **Using `docker`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
 
@@ -70,6 +75,15 @@ Run sgbr-technical-test using the following command:
 ❯ ./vendor/bin/sail up -d
 ```
 
+
+
+```sh
+❯ ./vendor/bin/sail artisan key:generate
+```
+
+```sh
+❯ ./vendor/bin/sail artisan migrate
+```
 
 ###  Testing
 Run the test suite using the following command:
