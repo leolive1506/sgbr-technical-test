@@ -17,7 +17,7 @@ class LocationController extends Controller
 {
     public function index(IndexLocationRequest $request)
     {
-        $location = Location::query()
+        $locations = Location::query()
             ->select([
                 'id',
                 'name',
@@ -29,7 +29,7 @@ class LocationController extends Controller
             ->paginate();
 
         return $this->success(
-            content: new PaginateResource($location, LocationResource::class)
+            content: new PaginateResource($locations, LocationResource::class)
         );
     }
 
